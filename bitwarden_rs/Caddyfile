@@ -1,25 +1,25 @@
 # Caddyfile V2.0 config file
-:80 {
-  #Caddy on port 80 in container to bitwarden_rs private instance
-  #Use it if Caddy behind another reverse proxy such as the one embedded on Synology
-  log {
-	output file {env.LOG_FILE}
-	level INFO
-	#roll_size 5MiB #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
-	#roll_keep 5 #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
-  }
-  encode zstd gzip
+# :80 {
+#   #Caddy on port 80 in container to bitwarden_rs private instance
+#   #Use it if Caddy behind another reverse proxy such as the one embedded on Synology
+#   log {
+# 	output file {env.LOG_FILE}
+# 	level INFO
+# 	#roll_size 5MiB #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
+# 	#roll_keep 5 #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
+#   }
+#   encode zstd gzip
 
-  header / {
-       # Enable cross-site filter (XSS) and tell browser to block detected attacks
-       X-XSS-Protection "1; mode=block"
-       # Disallow the site to be rendered within a frame (clickjacking protection)
-       X-Frame-Options "DENY"
-       # Prevent search engines from indexing (optional)
-       X-Robots-Tag "none"
-	   # Server name remove
-	   -Server
-   }
+#   header / {
+#        # Enable cross-site filter (XSS) and tell browser to block detected attacks
+#        X-XSS-Protection "1; mode=block"
+#        # Disallow the site to be rendered within a frame (clickjacking protection)
+#        X-Frame-Options "DENY"
+#        # Prevent search engines from indexing (optional)
+#        X-Robots-Tag "none"
+# 	   # Server name remove
+# 	   -Server
+#    }
 
   # The negotiation endpoint is also proxied to Rocket
   reverse_proxy /notifications/hub/negotiate bitwardenrs:80
