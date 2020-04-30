@@ -39,13 +39,13 @@ services:
       - TZ=Europe/Paris
       - LOG_FILE=/data/logs/caddy.log
       # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
-      - SSLCERTIFICATE=/path/to/ssl/fullcert.pem
-      - SSLKEY=/path/to/ssl/key.pem
+      # - SSLCERTIFICATE=/path/to/ssl/fullcert.pem
+      # - SSLKEY=/path/to/ssl/key.pem
       - ACMEE_AGREE='true'
       - DOMAIN="zsoracle.ml"
       #- EMAIL=mail@mail.com
     ports:
-      - 8080:80
+      # - 8080:80
       - 8443:443
     networks:
       - bitwarden_net
