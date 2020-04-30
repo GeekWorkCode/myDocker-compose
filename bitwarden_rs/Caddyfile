@@ -1,6 +1,6 @@
 # Caddyfile
 {$DOMAIN} {
-    tls {$EMAIL}
+    # tls {$EMAIL}
 
     header / {
         # Enable HTTP Strict Transport Security (HSTS)
