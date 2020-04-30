@@ -36,7 +36,7 @@ services:
     image: "caddy/caddy:latest"
     container_name: Caddy_proxy
     environment:
-      - TZ=Europe/Paris
+      # - TZ=Europe/Paris
       - LOG_FILE=/data/logs/caddy.log
       # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
       # - SSLCERTIFICATE=/path/to/ssl/fullcert.pem
@@ -45,7 +45,7 @@ services:
       - DOMAIN="zsoracle.ml"
       #- EMAIL=mail@mail.com
     ports:
-      # - 8080:80
+      - 8080:80
       - 8443:443
     networks:
       - bitwarden_net
