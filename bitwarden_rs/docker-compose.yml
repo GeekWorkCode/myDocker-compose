@@ -25,6 +25,7 @@ services:
       - DISABLE_ICON_DOWNLOAD='true'
     expose:
       - "80"
+      - "443"
     networks:
       - bitwarden_net
     volumes:
@@ -39,7 +40,7 @@ services:
       - TZ=Europe/Paris
       - LOG_FILE=/data/logs/caddy.log
       # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
-      - ACMEE_AGREE='true'
+      # - ACMEE_AGREE='true'
       - DOMAIN="zsoracle.ml"
       #- EMAIL=mail@mail.com
     ports:
