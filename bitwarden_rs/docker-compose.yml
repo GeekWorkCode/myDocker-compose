@@ -1,60 +1,29 @@
---- #---
-#---
-#Docker-compose file for Bitwarde_rs proxied by caddy 2.0
-version: "3"
+ docker-compose.yml
+version: '3'
+
 services:
-  bitwardenrs:
+  bitwarden:
+    image: bitwardenrs/server
     restart: always
-    # Dani Garcia image https://github.com/dani-garcia/bitwarden_rs
-    image: "bitwardenrs/server:latest"
-    container_name: bitwardenrs
-    environment:
-      # Timezone settings, important for Fail2ban to work
-      - TZ=Europe/Paris
-      # Logging connection attemps
-      - LOG_FILE=/data/bitwarden.log
-      - EXTENDED_LOGGING='true'
-      - LOG_LEVEL=warn
-      # Beef up a bit
-      - ROCKET_WORKERS=20
-      - WEBSOCKET_ENABLED='true'
-      # Hardening a bit
-      - SIGUPS_ALLOWED='false'
-      - DISABLE_ADMIN_TOKEN='true'
-      - SHOW_PASSWORD_HINT='false'
-      - DISABLE_ICON_DOWNLOAD='true'
-    expose:
-      - "80"
-    networks:
-      - bitwarden_net
     volumes:
-      - /volume1/docker/bw-data:/data
+      - ./bw-data:/data
+    environment:
+      WEBSOCKET_ENABLED: 'true' # Required to use websockets
+      SIGNUPS_ALLOWED: 'true'   # set to false to disable signups
 
   caddy:
+    image: abiosoft/caddy
     restart: always
-    #Official Caddy 2.0 image
-    image: "caddy/caddy:latest"
-    container_name: Caddy_proxy
-    environment:
-      # - TZ=Europe/Paris
-      - LOG_FILE=/data/logs/caddy.log
-      # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
-      # - SSLCERTIFICATE=/path/to/ssl/fullcert.pem
-      # - SSLKEY=/path/to/ssl/key.pem
-      - ACMEE_AGREE='true'
-      - DOMAIN="zsoracle.ml"
-      #- EMAIL=mail@mail.com
-    ports:
-      - 8080:80
-      - 8443:443
-    networks:
-      - bitwarden_net
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - Certfiles:/root/.caddy
+      - ./Caddyfile:/etc/Caddyfile:ro
+      - caddycerts:/root/.caddy
+    ports:
+      - 80:80 # needed for Let's Encrypt
+      - 443:443
+    environment:
+      ACME_AGREE: 'true'              # agree to Let's Encrypt Subscriber Agreement
+      DOMAIN: 'bitwarden.example.org' # CHANGE THIS! Used for Auto Let's Encrypt SSL
+      EMAIL: 'bitwarden@example.org'  # CHANGE THIS! Optional, provided to Let's Encrypt
 
 volumes:
-  Certfiles:
-
-networks:
-  bitwarden_net:
+  caddycerts:
