@@ -46,7 +46,7 @@ services:
       #- EMAIL=mail@mail.com
     ports:
       - 8080:80
-      #- 8443:443
+      - 8443:443
     networks:
       - bitwarden_net
     volumes:
