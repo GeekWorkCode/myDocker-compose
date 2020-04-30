@@ -18,8 +18,8 @@ services:
       - ./Caddyfile:/etc/Caddyfile:ro
       - caddycerts:/root/.caddy
     ports:
-      - 80:80 # needed for Let's Encrypt
-      - 443:443
+      - 8080:80 # needed for Let's Encrypt
+      - 8443:443
     environment:
       ACME_AGREE: "true" # agree to Let's Encrypt Subscriber Agreement
       DOMAIN: "bitwarden.example.org" # CHANGE THIS! Used for Auto Let's Encrypt SSL
