@@ -44,7 +44,7 @@
  }
 
  # Uncomment only one of the 2 lines. Depending if you provide your own cert or request one from Let's Encrypt
- tls {env.SSLCERTIFICATE} {env.SSLKEY}
+#  tls {env.SSLCERTIFICATE} {env.SSLKEY}
 #  tls {env.EMAIL}
 
  encode zstd gzip
