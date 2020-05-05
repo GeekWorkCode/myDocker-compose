@@ -37,6 +37,7 @@ services:
     image: "caddy/caddy:latest"
     container_name: Caddy_proxy
     environment:
+      LOG_FILE: '/data/logs/caddy.log'
       ACME_AGREE: 'true'              # agree to Let's Encrypt Subscriber Agreement
       DOMAIN: 'zscool.ml' # CHANGE THIS! Used for Auto Let's Encrypt SSL
       EMAIL: 'asd486@live.com'  # CHANGE THIS! Optional, provided to Let's Encrypt
