@@ -18,7 +18,7 @@ services:
       - ./Caddyfile:/etc/Caddyfile:ro
       - caddycerts:/root/.caddy
     ports:
-      - 8080:8080 # needed for Let's Encrypt
+      - 80:80 # needed for Let's Encrypt
       - 443:443
     environment:
       ACME_AGREE: "true" # agree to Let's Encrypt Subscriber Agreement
