@@ -22,8 +22,8 @@ services:
       - 443:443
     environment:
       ACME_AGREE: "true" # agree to Let's Encrypt Subscriber Agreement
-      DOMAIN: "bitwarden.example.org" # CHANGE THIS! Used for Auto Let's Encrypt SSL
-      EMAIL: "bitwarden@example.org" # CHANGE THIS! Optional, provided to Let's Encrypt
+      DOMAIN: "zsoracle.ml" # CHANGE THIS! Used for Auto Let's Encrypt SSL
+      EMAIL: "zscloudx@gmail.com" # CHANGE THIS! Optional, provided to Let's Encrypt
 
 volumes:
   caddycerts:
