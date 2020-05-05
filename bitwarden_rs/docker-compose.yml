@@ -50,9 +50,7 @@ services:
     networks:
       - bitwarden_net
     volumes:
-      - ./caddy-data/config/Caddyfile:/etc/caddy/Caddyfile
-      - ./caddy-data/data:/data
-      - ./caddy-data/sites:/var/www/html
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - Certfiles:/root/.caddy
 
 volumes:

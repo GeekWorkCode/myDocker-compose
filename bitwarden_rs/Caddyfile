@@ -37,7 +37,7 @@
  #Doc about automatic HTTPS https://caddyserver.com/docs/automatic-https
 
  log {
-	output file {env.LOG_FILE}
+	output file {$LOG_FILE}
 	level INFO
   #roll_size 5MiB #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
   #rool_keep 5 #Not working on Caddy V2.0.0 Beta20 https://caddyserver.com/docs/caddyfile/directives/log#log
