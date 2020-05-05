@@ -1,22 +1,20 @@
 #Caddyfile V2 .0 config file 
 {$DOMAIN} {
-  tls { $EMAIL}
+  tls {$EMAIL}
   encode zstd gzip
-
   header / {
-    #
-    Enable HTTP Strict Transport Security(HSTS)
-    Strict - Transport - Security "max-age=31536000;"#
-    Enable cross - site filter(XSS) and tell browser to block detected attacks
-    X - XSS - Protection "1; mode=block"#
-    Disallow the site to be rendered within a frame(clickjacking protection)
-    X - Frame - Options "DENY"#
-    Prevent search engines from indexing(optional)
-    X - Robots - Tag "none"#
-    Server name remove -
-    Server
-  }#
-  The negotiation endpoint is also proxied to Rocket
+    # Enable HTTP Strict Transport Security (HSTS)
+      Strict-Transport-Security "max-age=31536000;"
+      # Enable cross-site filter (XSS) and tell browser to block detected attacks
+      X-XSS-Protection "1; mode=block"
+      # Disallow the site to be rendered within a frame (clickjacking protection)
+      X-Frame-Options "DENY"
+      # Prevent search engines from indexing (optional)
+      # X-Robots-Tag "none"
+      # Server name remove
+      # -Server
+  }
+  #The negotiation endpoint is also proxied to Rocket
   reverse_proxy / notifications / hub / negotiate bitwardenrs: 80
 
   # Notifications redirected to the websockets server
