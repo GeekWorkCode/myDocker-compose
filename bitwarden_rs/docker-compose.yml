@@ -34,14 +34,9 @@ services:
     image: "caddy/caddy:latest"
     container_name: Caddy_proxy
     environment:
-      # - TZ=Europe/Paris
-      # - LOG_FILE=/data/logs/caddy.log
-      # Update this if SSL required according to the use of your own cert or requuest one from Let's Encrypt
-      #- SSLCERTIFICATE=/path/to/ssl/fullcert.pem
-      #- SSLKEY=/path/to/ssl/key.pem
-      ACME_AGREE: 'true'
-      DOMAIN:'zscool.ml'
-      EMAIL: 'asd486@live.com'
+      ACME_AGREE: 'true'              # agree to Let's Encrypt Subscriber Agreement
+      DOMAIN: 'zscool.ml' # CHANGE THIS! Used for Auto Let's Encrypt SSL
+      EMAIL: 'asd486@live.com'  # CHANGE THIS! Optional, provided to Let's Encrypt
     ports:
       - 80:80
       - 443:443
