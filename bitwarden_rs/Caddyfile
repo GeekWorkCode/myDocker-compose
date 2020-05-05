@@ -14,7 +14,7 @@
     }
 
     # The negotiation endpoint is also proxied to Rocket
-    proxy /notifications/hub/negotiate bitwarden:80 {
+    proxy /notifications/hub/negotiate bitwarden:8080 {
         transparent
     }
 
@@ -24,7 +24,7 @@
     }
 
     # Proxy the Root directory to Rocket
-    proxy / bitwarden:80 {
+    proxy / bitwarden:8080 {
         transparent
     }
 }
