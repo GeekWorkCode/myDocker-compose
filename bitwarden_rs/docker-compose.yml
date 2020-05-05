@@ -24,7 +24,6 @@ services:
       - SHOW_PASSWORD_HINT='false'
       - DISABLE_ICON_DOWNLOAD='true'
     expose:
-      - "80"
       - "443"
     networks:
       - bitwarden_net
@@ -44,7 +43,7 @@ services:
       - DOMAIN="zsoracle.ml"
       #- EMAIL=mail@mail.com
     ports:
-      - 8080:80
+      # - 8080:80
       - 8443:443
     networks:
       - bitwarden_net
