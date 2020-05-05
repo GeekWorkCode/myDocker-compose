@@ -14,11 +14,17 @@
     }
 
     # The negotiation endpoint is also proxied to Rocket
- reverse_proxy /notifications/hub/negotiate bitwardenrs:80
+    proxy /notifications/hub/negotiate bitwarden:80 {
+        transparent
+    }
 
- # Notifications redirected to the websockets server
- reverse_proxy /notifications/hub bitwardenrs:3012
+    # Notifications redirected to the websockets server
+    proxy /notifications/hub bitwarden:3012 {
+        websocket
+    }
 
- # Proxy the Root directory to Rocket
- reverse_proxy bitwardenrs:80
+    # Proxy the Root directory to Rocket
+    proxy / bitwarden:80 {
+        transparent
+    }
 }
