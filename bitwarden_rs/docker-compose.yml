@@ -1,59 +1,58 @@
--- - # -- - # -- - #Docker - compose file
-for Bitwarde_rs proxied by caddy 2.0
+--- #---
+#---
+#Docker-compose file for Bitwarde_rs proxied by caddy 2.0
 version: "3"
 services:
   bitwardenrs:
-  restart: always# Dani Garcia image https: //github.com/dani-garcia/bitwarden_rs
-  image: "bitwardenrs/server:latest"
-container_name: bitwardenrs
-environment: #Timezone settings, important
-for Fail2ban to work
-  -
-  TZ = Europe / Paris# Logging connection attemps -
-  LOG_FILE = /data/bitwarden.log -
-  EXTENDED_LOGGING = 'true' -
-  LOG_LEVEL = warn# Beef up a bit -
-  ROCKET_WORKERS = 20 -
-  WEBSOCKET_ENABLED = 'true'#
-Hardening a bit
-  -
-  SIGUPS_ALLOWED = 'false' -
-  DISABLE_ADMIN_TOKEN = 'true' -
-  SHOW_PASSWORD_HINT = 'false' -
-  DISABLE_ICON_DOWNLOAD = 'true'
-expose:
-  -"80" -
-  "443"
-networks:
-  -bitwarden_net
-volumes:
-  -/volume1/docker / bw - data: /data
+    restart: always
+    # Dani Garcia image https://github.com/dani-garcia/bitwarden_rs
+    image: "bitwardenrs/server:latest"
+    container_name: bitwardenrs
+    environment:
+      # Timezone settings, important for Fail2ban to work
+      - TZ=Europe/Paris
+      # Logging connection attemps
+      - LOG_FILE=/data/bitwarden.log
+      - EXTENDED_LOGGING='true'
+      - LOG_LEVEL=warn
+      # Beef up a bit
+      - ROCKET_WORKERS=20
+      - WEBSOCKET_ENABLED='true'
+      # Hardening a bit
+      - SIGUPS_ALLOWED='false'
+      - DISABLE_ADMIN_TOKEN='true'
+      - SHOW_PASSWORD_HINT='false'
+      - DISABLE_ICON_DOWNLOAD='true'
+    expose:
+      - "80"
+      - "443"
+    networks:
+      - bitwarden_net
+    volumes:
+      - /volume1/docker/bw-data:/data
 
-caddy:
-  restart: always# Official Caddy 2.0 image
-image: "caddy/caddy:latest"
-container_name: Caddy_proxy
-environment:
-  ACME_AGREE: 'true'#
-agree to Let 's Encrypt Subscriber Agreement
-DOMAIN: 'zscool.ml'#
-CHANGE THIS!Used
-for Auto Let 's Encrypt SSL
-EMAIL: 'asd486@live.com'#
-CHANGE THIS!Optional, provided to Let 's Encrypt
-ports:
-  -80: 80 -
-  443: 443
-networks:
-  -bitwarden_net
-volumes:
-  -. / caddy - data / config / Caddyfile: /etc/caddy / Caddyfile -
-  . / caddy - data / data: /data -
-  . / caddy - data / sites: /var/www / html -
-  Certfiles: /root/.caddy
+  caddy:
+    restart: always
+    #Official Caddy 2.0 image
+    image: "caddy/caddy:latest"
+    container_name: Caddy_proxy
+    environment:
+      ACME_AGREE: 'true'              # agree to Let's Encrypt Subscriber Agreement
+      DOMAIN: 'zscool.ml' # CHANGE THIS! Used for Auto Let's Encrypt SSL
+      EMAIL: 'asd486@live.com'  # CHANGE THIS! Optional, provided to Let's Encrypt
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - bitwarden_net
+    volumes:
+      - ./caddy-data/config/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy-data/data:/data
+      - ./caddy-data/sites:/var/www/html
+      - Certfiles:/root/.caddy
 
 volumes:
   Certfiles:
 
-  networks:
+networks:
   bitwarden_net:
