@@ -37,6 +37,8 @@ services:
     container_name: subconverter
     expose:
       - 25500
+    networks:
+      - subconverter_net
 
   caddy:
     restart: always
@@ -54,6 +56,7 @@ services:
       - 25500:25500
     networks:
       - bitwarden_net
+      - subconverter_net
     volumes:
       - ./caddy-data/config/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy-data/data:/data
@@ -65,3 +68,4 @@ volumes:
 
 networks:
   bitwarden_net:
+  subconverter_net:
