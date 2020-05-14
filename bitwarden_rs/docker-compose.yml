@@ -31,6 +31,15 @@ services:
     volumes:
       - /volume1/docker/bw-data:/data
 
+  subconverter:
+    restart: always
+    image: stilleshan/subconverter
+    container_name: subconverter
+    expose:
+      - 25500
+    networks:
+      - subconverter_net
+
   caddy:
     restart: always
     #Official Caddy 2.0 image
@@ -44,8 +53,10 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 25500:25500
     networks:
       - bitwarden_net
+      - subconverter_net
     volumes:
       - ./caddy-data/config/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy-data/data:/data
@@ -57,3 +68,4 @@ volumes:
 
 networks:
   bitwarden_net:
+  subconverter_net:
