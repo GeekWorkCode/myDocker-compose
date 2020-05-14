@@ -37,8 +37,6 @@ services:
     container_name: subconverter
     expose:
       - 25500
-    networks:
-      - subconverter_net
 
   caddy:
     restart: always
@@ -68,4 +66,3 @@ volumes:
 
 networks:
   bitwarden_net:
-  subconverter_net:
