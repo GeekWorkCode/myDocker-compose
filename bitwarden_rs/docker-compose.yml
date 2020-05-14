@@ -31,9 +31,9 @@ services:
     volumes:
       - /volume1/docker/bw-data:/data
 
-  subconverter:
+  subonverter:
     restart: always
-    image: stilleshan/subconverter
+    image: "stilleshan/subconverter"
     container_name: subconverter
     expose:
       - 25500
