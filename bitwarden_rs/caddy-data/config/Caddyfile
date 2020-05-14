@@ -75,7 +75,7 @@
 
 }
 
-:25500 {
+{$DOMAIN}:25500 {
 
  log {
 	output file {$LOG_FILE}
