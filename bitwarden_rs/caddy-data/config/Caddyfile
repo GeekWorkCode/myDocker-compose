@@ -86,7 +86,7 @@
 
  # Uncomment only one of the 2 lines. Depending if you provide your own cert or request one from Let's Encrypt
 #  tls {$SSLCERTIFICATE} {$SSLKEY}
-#  tls {$EMAIL}
+ tls {$EMAIL}
 
  encode zstd gzip
 
@@ -102,6 +102,6 @@
       # Server name remove
       # -Server
   }
-   reverse_proxy subonverter:80
+   reverse_proxy subonverter:25500
 
 }
