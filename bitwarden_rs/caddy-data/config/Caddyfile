@@ -102,8 +102,6 @@
       # Server name remove
       # -Server
   }
-   reverse_proxy / localhost:25500 {
-     transparent
-   }
+   reverse_proxy subonverter:25500
 
 }
